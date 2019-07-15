@@ -5,10 +5,9 @@
  */
 package managedBean;
 
-import Dao.ClienteDao;
-import entidades.Cliente;
+import Dao.UsuariosDao;
+import entidades.Usuarios;
 import java.util.ArrayList;
-import java.util.Date;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -16,101 +15,95 @@ import javax.faces.context.FacesContext;
 
 /**
  *
- * @author USUARIOWIN10
+ * @author USUARIO
  */
 @ManagedBean
 @ViewScoped
-public class ClienteBeans {
+public class UsuarioBeans {
+    
+    private Usuarios usuario;
+    private boolean banderaSelect = false;
+    
+    public UsuarioBeans(){
+        this.usuario = new Usuarios();
+    
+}
+    
+    public ArrayList<Usuarios> listarUsuarios() {
+        ArrayList<Usuarios> milista = new ArrayList<>();
+        UsuariosDao dao = new UsuariosDao();
+        milista = dao.listarUsuarios();
+        return milista;
 
-    //private Date date9;
-    private Cliente cliente;
-     private boolean banderaSelect = false;
-
-    //constructor
-    public ClienteBeans() {
-        this.cliente = new Cliente();
     }
-    private java.util.Date data;
-
-    public Date getData() {
-        return data;
-    }
-
-    public void setData(Date data) {
-        this.data = data;
-    }
-
-    public String guardarCliente() {
-        ClienteDao clientedao = new ClienteDao();
-        boolean respuesta = clientedao.guardarCliente(cliente);
+    
+      public String guardarUsuarios() {
+        UsuariosDao dao = new UsuariosDao();
+        boolean respuesta = dao.guardarUsuarios(usuario);
         if (respuesta) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Se guardo correctamente"));
         } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("No se pudo registrar"));
         }
-        return "/RegistroCliente";
+        return "/MantenimientoUsuario";
 
     }
 
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-
-    public String actualizarCliente() {
+    public String ActualizarUsuarios() {
         try {
-            ClienteDao mascotadao = new ClienteDao();
-            boolean resp = mascotadao.ActualizarMascota(cliente);
+            UsuariosDao mascotadao = new UsuariosDao();
+            boolean resp = mascotadao.ActualizarUsuarios(usuario);
             if (resp) {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Se actualizo correctamente"));
             } else {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("No se Pudo Actualizar"));
 
             }
-            mascotadao.ActualizarMascota(cliente);
+            mascotadao.ActualizarUsuarios(usuario);
         } catch (Exception e) {
             System.out.println("Error::" + e);
         }
-        return "/RegistroCliente";
+        return "/MantenimientoUsuario";
     }
-
-    public ArrayList<Cliente> listarCliente() {
-        ArrayList<Cliente> milista = new ArrayList<>();
-        ClienteDao dao = new ClienteDao();
-        milista = dao.listarCliente();
-        return milista;
-
-    }
-
-    public String limpiar() {
+    
+        public String limpiar() {
         banderaSelect=false;
-        return "/RegistroCliente.xhtml";
+        return "/MantenimientoUsuario.xhtml";
     }
-
-    public String eliminar(Cliente data) {
-        ClienteDao madao = new ClienteDao();
-        boolean respuesta = madao.eliminarMascota(data);
+        
+          public String eliminar(Usuarios data) {
+        UsuariosDao usadao = new UsuariosDao();
+        boolean respuesta = usadao.eliminarUsuarios(data);
         if (respuesta) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Se elimino correctamente"));
         } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("No se pudo eliminar"));
         }
 
-        return "/RegistroCliente.xhtml";
+        return "/MantenimientoUsuario.xhtml";
     }
+
     public void selectBandera() {
         banderaSelect = true;
     }
-
-    public boolean isBanderaSelect() {
+     public boolean isBanderaSelect() {
         return banderaSelect;
     }
 
     public void setBanderaSelect(boolean banderaSelect) {
         this.banderaSelect = banderaSelect;
     }
+
+    public Usuarios getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuarios usuario) {
+        this.usuario = usuario;
+    }
+
+ 
+    
+    
     
 }

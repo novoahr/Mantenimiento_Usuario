@@ -13,11 +13,11 @@
             <ui:define name="content">
                 <p:growl id="msj" autoUpdate="true"/>
                 <div align="center">
-                    <h:form id="formMascota">
+                    <h:form id="formUsuario">
                         <p:panel style="width: 40%">
                             <f:facet name="header">
                                 <p:column>
-                                    <p:outputLabel value="Mascotas"/>
+                                    <p:outputLabel value="Usuarios"/>
                                 </p:column>
                             </f:facet>
                             <p:panelGrid>
@@ -27,60 +27,60 @@
                                         <p:outputLabel value="ID"/>
                                     </p:column>
                                     <p:column>
-                                        <p:inputText value="#{mascotaBeans.mascota.idMascota}"/>
+                                        <p:inputText value="#{usuarioBeans.usuario.idUsuario}"/>
                                     </p:column>
                                 </p:row>
                                 <p:row>
                                     <p:column>
-                                        <p:outputLabel value="Nombre Mascota"/>
+                                        <p:outputLabel  value="Nombre Usuario"/>
 
                                     </p:column>
                                     <p:column>
-                                        <p:inputText value="#{mascotaBeans.mascota.nombreMascota}"/>
+                                        <p:inputText  value="#{usuarioBeans.usuario.nombreUsuario}"/>
                                     </p:column>
                                 </p:row>
                                 <p:row>
                                     <p:column>
-                                        <p:outputLabel value="Nombre Dueño"/> 
-                                    </p:column>
-                                    <p:column>
-                                        <p:inputText value="#{mascotaBeans.mascota.nombreCliente}"/>
-                                    </p:column>
-                                </p:row>
-                                <p:row>
-                                    <p:column>
-                                        <p:outputLabel value="Raza"/> 
 
                                     </p:column>
                                     <p:column>
-                                        <p:inputText value="#{mascotaBeans.mascota.raza}"/>
+                                        <p:inputText type="password" value="#{usuarioBeans.usuario.passwordUsuario}"/>
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column>
+                                      
+
+                                    </p:column>
+                                    <p:column>
+                                        <p:inputText type="email" value="#{usuarioBeans.usuario.emailUsuario}"/>
                                     </p:column>
                                 </p:row>
                             </p:panelGrid>
-                            <p:commandButton rendered="#{!mascotaBeans.banderaSelect}" value="Guardar" action="#{mascotaBeans.guardarMascota()}" update=":formData:dataTableMascota,:formMascota" />
-                            <p:commandButton value="Nuevo" action="#{mascotaBeans.limpiar()}" update=":formData:dataTableMascota,:formMascota"/>
-                            <p:commandButton rendered="#{mascotaBeans.banderaSelect}" value="Actualizar" action="#{mascotaBeans.actualizarMascota()}" update=":formData:dataTableMascota,:formMascota"/>
+                            <p:commandButton rendered="#{!usuarioBeans.banderaSelect}" value="Guardar" action="#{usuarioBeans.guardarUsuarios()}" update=":formData:dataTableUsuario,:formUsuario" />
+                            <p:commandButton value="Nuevo" action="#{usuarioBeans.limpiar()}" update=":formData:dataTableUsuario,:formUsuario"/>
+                            <p:commandButton rendered="#{usuarioBeans.banderaSelect}" value="Actualizar" action="#{usuarioBeans.ActualizarUsuarios()}" update=":formData:dataTableUsuario,:formUsuario"/>
 
                         </p:panel>
                     </h:form>
 
                     <h:form id="formData">
-                        <p:dataTable rowKey="#{mascota.idMascota}" selection="#{mascotaBeans.mascota}" selectionMode="single" id="dataTableMascota" var="mascota" value="#{mascotaBeans.listarMascota()}" style="width: 40%">
-                            <p:ajax event="rowSelect" update=":formMascota" listener="#{mascotaBeans.selectBandera()}"/>
+                        <p:dataTable rowKey="#{usuario.idUsuario}" selection="#{usuarioBeans.usuario}" selectionMode="single" id="dataTableUsuario" var="usuario" value="#{usuarioBeans.listarUsuarios()}" style="width: 40%">
+                            <p:ajax event="rowSelect" update=":formUsuario" listener="#{usuarioBeans.selectBandera()}"/>
                             <p:column headerText="Código">
-                                <p:outputLabel value="#{mascota.idMascota}"/>
+                                <p:outputLabel value="#{usuario.idUsuario}"/>
                             </p:column>
-                            <p:column headerText="Mascota">
-                                <p:outputLabel value="#{mascota.nombreMascota}"/>
+                            <p:column headerText="Nombre">
+                                <p:outputLabel value="#{usuario.nombreUsuario}"/>
                             </p:column>
-                            <p:column headerText="Cliente">
-                                <p:outputLabel value="#{mascota.nombreCliente}"/>
+                            <p:column headerText="Password">
+                                <p:outputLabel value="#{usuario.passwordUsuario}"/>
                             </p:column>
-                            <p:column headerText="Raza">
-                                <p:outputLabel value="#{mascota.raza}"/> 
+                            <p:column headerText="Email">
+                                <p:outputLabel value="#{usuario.emailUsuario}"/> 
                             </p:column>
                             <p:column>
-                                <p:commandButton value="Eliminar" action="#{mascotaBeans.eliminar(mascota)}" update=":formData:dataTableMascota,:formMascota"/>
+                                <p:commandButton value="Eliminar" action="#{usuarioBeans.eliminar(usario)}" update=":formData:dataTableUsuario,:formUsuario"/>
                             </p:column>
                         </p:dataTable>
                     </h:form>

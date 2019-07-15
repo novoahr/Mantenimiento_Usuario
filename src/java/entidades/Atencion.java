@@ -1,5 +1,5 @@
 package entidades;
-// Generated 24/06/2019 09:52:53 AM by Hibernate Tools 4.3.1
+// Generated 14/07/2019 08:22:38 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -10,8 +10,8 @@ import java.util.Date;
 public class Atencion  implements java.io.Serializable {
 
 
-     private int idAtencion;
-     private Mascotaporcliente mascotaporcliente;
+     private Integer idAtencion;
+     private ClienteHasMascota clienteHasMascota;
      private Personal personal;
      private Date fechaAtencion;
      private String diagnostico;
@@ -20,28 +20,27 @@ public class Atencion  implements java.io.Serializable {
     public Atencion() {
     }
 
-    public Atencion(int idAtencion, Mascotaporcliente mascotaporcliente, Personal personal, Date fechaAtencion, String diagnostico, Date horaAtencion) {
-       this.idAtencion = idAtencion;
-       this.mascotaporcliente = mascotaporcliente;
+    public Atencion(ClienteHasMascota clienteHasMascota, Personal personal, Date fechaAtencion, String diagnostico, Date horaAtencion) {
+       this.clienteHasMascota = clienteHasMascota;
        this.personal = personal;
        this.fechaAtencion = fechaAtencion;
        this.diagnostico = diagnostico;
        this.horaAtencion = horaAtencion;
     }
    
-    public int getIdAtencion() {
+    public Integer getIdAtencion() {
         return this.idAtencion;
     }
     
-    public void setIdAtencion(int idAtencion) {
+    public void setIdAtencion(Integer idAtencion) {
         this.idAtencion = idAtencion;
     }
-    public Mascotaporcliente getMascotaporcliente() {
-        return this.mascotaporcliente;
+    public ClienteHasMascota getClienteHasMascota() {
+        return this.clienteHasMascota;
     }
     
-    public void setMascotaporcliente(Mascotaporcliente mascotaporcliente) {
-        this.mascotaporcliente = mascotaporcliente;
+    public void setClienteHasMascota(ClienteHasMascota clienteHasMascota) {
+        this.clienteHasMascota = clienteHasMascota;
     }
     public Personal getPersonal() {
         return this.personal;

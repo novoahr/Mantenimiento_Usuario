@@ -5,33 +5,30 @@
  */
 package Dao;
 
-import entidades.Mascota;
-import interfaces.IMascota;
+import entidades.Usuarios;
+import interfaces.IUsuario;
 import java.util.ArrayList;
-import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
 import utilitarios.HibernateUtil;
 
 /**
  *
- * @author USUARIOWIN10
+ * @author USUARIO
  */
-public class MascotaDao implements IMascota {
+public class UsuariosDao implements IUsuario{
 
     @Override
-    public boolean guardarMascota(Mascota mascota) {
-        //Construir una nueva session y una nueva transaccion
+    public boolean guardarUsuarios(Usuarios usuarios) {
+         //Construir una nueva session y una nueva transaccion
         boolean respuesta = true;
         Session sesion = HibernateUtil.getSessionFactory().openSession();
         Transaction transaccion = sesion.beginTransaction();
         //Rgistrar en la base de datos la mascota
 
         try {
-            sesion.save(mascota);
+            sesion.save(usuarios);
             transaccion.commit();
         } catch (Exception e) {
             System.out.println("ERROR DE GUARFDAR::" + e);
@@ -43,28 +40,26 @@ public class MascotaDao implements IMascota {
     }
 
     @Override
-    public ArrayList<Mascota> listarMascotas() {
+    public ArrayList<Usuarios> listarUsuarios() {
         Session sesion = HibernateUtil.getSessionFactory().openSession();
-        ArrayList<Mascota> milista = new ArrayList<>();
+        ArrayList<Usuarios> milista = new ArrayList<>();
         //Create la consulta hacia la base de datos
-        Query query = sesion.createQuery("from Mascota");
+        Query query = sesion.createQuery("from Usuarios");
         //Ejecutar la consulta y obtener la lista
-        milista = (ArrayList<Mascota>) query.list();
-          sesion.close();
+        milista = (ArrayList<Usuarios>) query.list();
+        sesion.close();
         return milista;
-    
-       
     }
 
     @Override
-    public boolean ActualizarMascota(Mascota mascota) {
-        System.out.println("error"+ mascota.getNameCliente());
+    public boolean ActualizarUsuarios(Usuarios usuarios) {
+        System.out.println("error"+ usuarios.getNombreUsuario());
         boolean resp= true;
         Session sesion= null;
         try {
             sesion=HibernateUtil.getSessionFactory().openSession();
             Transaction transaction=sesion.beginTransaction();
-            sesion.update(mascota);
+            sesion.update(usuarios);
             transaction.commit();
         } catch (Exception e) {
             System.out.println("Error en actualizar::"+e);
@@ -78,41 +73,13 @@ public class MascotaDao implements IMascota {
     }
 
     @Override
-    public ArrayList<Mascota> listarMascotasRaza(Session sesion) {
-        String hql = " from Mascota where raza='Pastor Aleman'";
-        Query query = sesion.createQuery(hql);
-        List< Mascota> lista = (List< Mascota>) query.list();
-        return (ArrayList<Mascota>) lista;
-
-    }
-
-    @Override
-    public ArrayList<Mascota> listarMascotasNombre(Session sesion) {
-        String hql = " from Mascota where nombreMascota='Sandor'";
-        Query query = sesion.createQuery(hql);
-        List< Mascota> lista = (List< Mascota>) query.list();
-        return (ArrayList<Mascota>) lista;
-
-    }
-
-    @Override
-    public Integer Contar(Session sesion) {
-        String hql = "select count(*) from Mascota";
-        Query query = sesion.createQuery(hql);
-        Long FilasTab = (Long) query.uniqueResult();
-        Integer cont = FilasTab.intValue();
-        return cont;
-
-    }
-
-    @Override
-    public boolean eliminarMascota(Mascota mascota) {
+    public boolean eliminarUsuarios(Usuarios usuarios) {
         Session sesion = null;
         boolean resp = true;
         try {
             sesion = HibernateUtil.getSessionFactory().openSession();
             sesion.beginTransaction();
-            sesion.delete(mascota);
+            sesion.delete(usuarios);
             sesion.getTransaction().commit();
 
         } catch (Exception e) {
@@ -127,5 +94,8 @@ public class MascotaDao implements IMascota {
 
         }
         return resp;
+
     }
+
+    
 }

@@ -50,12 +50,13 @@ public class PersonalDao implements IPersonal {
         Query query = sesion.createQuery("from Personal");
         //Ejecutar la consulta y obtener la lista
         milista = (ArrayList<Personal>) query.list();
+        sesion.close();
         return milista;
     }
 
     @Override
     public boolean ActualizarPersonal(Personal personal) {
-        System.out.println("error"+ personal.getNombre());
+        //System.out.println("error"+ personal.getNombre());
         boolean resp= true;
         Session sesion= null;
         try {
@@ -68,9 +69,7 @@ public class PersonalDao implements IPersonal {
         }finally{
             if(sesion != null){
                 sesion.close();
-            }
-            
-            
+            } 
         }
        return resp;
     }
@@ -78,6 +77,7 @@ public class PersonalDao implements IPersonal {
 
     @Override
     public boolean eliminarPersonal(Personal personal) {
+       
         Session sesion = null;
         boolean resp = true;
         try {
@@ -99,4 +99,5 @@ public class PersonalDao implements IPersonal {
         }
         return resp;
     }
+
 }

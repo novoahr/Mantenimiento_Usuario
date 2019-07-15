@@ -24,40 +24,48 @@
 
                                 <p:row>
                                     <p:column>
-                                        <p:outputLabel value="ID"/>
+                                        <p:outputLabel value="Cliente"/>
                                     </p:column>
                                     <p:column>
-                                        <p:inputText value="#{mascotaBeans.mascota.idMascota}"/>
+                                        <p:selectOneMenu>
+                                            <p:selectOneMenu value="#{mascotaPorClienteBeans.idCliente}"/>
+                                            <f:selectItem itemLabel="--Seleccione un cliente--"/>
+                                            <f:selectItems value="#{mascotaPorClienteBeans.listaclientes}" var="clie" itemLabel="#{clie.nombre}" itemValue="#{clie.idCliente}"/>
+                                        </p:selectOneMenu>
                                     </p:column>
                                 </p:row>
+                                
                                 <p:row>
                                     <p:column>
-                                        <p:outputLabel value="Nombre Mascota"/>
-
+                                        <p:outputLabel value="Mascota"/>
                                     </p:column>
                                     <p:column>
-                                        <p:inputText value="#{mascotaBeans.mascota.nombreMascota}"/>
+                                        <p:selectOneMenu>
+                                            <p:selectOneMenu value="#{mascotaPorClienteBeans.idMascota}"/>
+                                            <f:selectItem itemLabel="--Seleccione una mascota--"/>
+                                            <f:selectItems value="#{mascotaPorClienteBeans.listamascotas}" var="masco" itemLabel="#{masco.nameMascota}" itemValue="#{masco.idMascota}"/>
+                                            
+                                        </p:selectOneMenu>
                                     </p:column>
                                 </p:row>
+                                
                                 <p:row>
                                     <p:column>
-                                        <p:outputLabel value="Nombre Dueño"/> 
+                                        <p:outputLabel value="Estado"/>
                                     </p:column>
                                     <p:column>
-                                        <p:inputText value="#{mascotaBeans.mascota.nombreCliente}"/>
+                                        <p:selectOneMenu>
+                                            <p:selectOneMenu value="#{mascotaPorClienteBeans.mascotaporcliente.estado}"/>
+                                            <f:selectItem itemLabel="--Seleccione un cliente--"/>
+                                            <f:selectItem itemLabel="Activo" itemValue="A"/>
+                                            <f:selectItem itemLabel="inactivo" itemValue="I"/>
+                                            
+                                        </p:selectOneMenu>
                                     </p:column>
                                 </p:row>
-                                <p:row>
-                                    <p:column>
-                                        <p:outputLabel value="Raza"/> 
-
-                                    </p:column>
-                                    <p:column>
-                                        <p:inputText value="#{mascotaBeans.mascota.raza}"/>
-                                    </p:column>
-                                </p:row>
+                                
                             </p:panelGrid>
-                            <p:commandButton rendered="#{!mascotaBeans.banderaSelect}" value="Guardar" action="#{mascotaBeans.guardarMascota()}" update=":formData:dataTableMascota,:formMascota" />
+                            <p:commandButton value="Guardar" action="#{mascotaPorClienteBeans.guardar()}" update=":formData:dataTableMascota,:formMascota" />
                             <p:commandButton value="Nuevo" action="#{mascotaBeans.limpiar()}" update=":formData:dataTableMascota,:formMascota"/>
                             <p:commandButton rendered="#{mascotaBeans.banderaSelect}" value="Actualizar" action="#{mascotaBeans.actualizarMascota()}" update=":formData:dataTableMascota,:formMascota"/>
 
@@ -71,10 +79,10 @@
                                 <p:outputLabel value="#{mascota.idMascota}"/>
                             </p:column>
                             <p:column headerText="Mascota">
-                                <p:outputLabel value="#{mascota.nombreMascota}"/>
+                                <p:outputLabel value="#{mascota.nameMascota}"/>
                             </p:column>
                             <p:column headerText="Cliente">
-                                <p:outputLabel value="#{mascota.nombreCliente}"/>
+                                <p:outputLabel value="#{mascota.nameCliente}"/>
                             </p:column>
                             <p:column headerText="Raza">
                                 <p:outputLabel value="#{mascota.raza}"/> 
@@ -88,7 +96,7 @@
             </ui:define>
 
         </ui:composition>
-
+        <a href="TemplateVeterinaria.xhtml"></a>
     </h:body>
 </html>
 
